@@ -1,10 +1,9 @@
 package com.ahmadarif.eventbus
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.Subscribe
 
 
@@ -15,6 +14,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addFragment()
+
+        btnSubmit.setOnClickListener {
+            val message = Events.ActivityFragmentMessage(etMessage.text.toString())
+            GlobalBus.bus.post(message)
+        }
     }
 
     override fun onStart() {
@@ -34,11 +38,6 @@ class MainActivity : AppCompatActivity() {
                 .commit()
     }
 
-    fun sendMessageToFragment() {
-        val message = Events.ActivityFragmentMessage(etMessage.text.toString())
-        GlobalBus.bus.post(message)
-    }
-
     @Subscribe
     fun getMessage(message: Events.FragmentActivityMessage) {
         txtMessage.text = "${getString(R.string.message_received)} ${message.message}"
@@ -47,6 +46,5 @@ class MainActivity : AppCompatActivity() {
                 "${getString(R.string.message_main_activity)} ${message.message}",
                 Toast.LENGTH_SHORT).show()
     }
-
 
 }

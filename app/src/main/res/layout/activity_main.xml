@@ -35,12 +35,11 @@
             android:hint="@string/hint_message"/>
 
         <Button
-            android:id="@+id/sendMessageToFragment"
+            android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/etMessage"
             android:layout_centerHorizontal="true"
-            android:onClick="sendMessageToFragment"
             android:text="@string/send_message_fragment"/>
 
     </RelativeLayout>
